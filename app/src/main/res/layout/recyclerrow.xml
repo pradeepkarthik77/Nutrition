@@ -2,14 +2,29 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:weightSum = "4"
+    android:paddingBottom="5dp"
+    android:gravity="center"
     >
+
+    <ImageView
+        android:id="@+id/foodimage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingRight="5dp"
+        />
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="3"
+        android:id="@+id/recycle_item_name"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         />
 
 
