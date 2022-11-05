@@ -1,0 +1,11 @@
+Item_id,Food_type,Portion,Calories,Carbs(gm),Fat(gm),Protein(gm)
+101,idli,2 idlis,66,8,0.8,4
+102,Dosa,2 Dosa,266,150,47,5
+103,Pongal,1 cup,200,100,50,10
+104,Masal Dosa,2 Dosa,300,150,50,7
+105,Sambhar Vada,2 Vadas,200,130,40,10
+106,Vada,2 Vadas,150,100,30,8
+107,Paneer Roast,1 cup,250,100,50,15
+108,Veg Noodles,1 cup,300,150,50,20
+109,Parotta,2 Parottas,300,200,50,30
+110,Fried Rice,1 cup,300,150,50,50
