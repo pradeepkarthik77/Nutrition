@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,8 +26,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            item_name = (TextView) itemView.findViewById(R.id.recycle_item_name);
-            item_pic = (ImageView) itemView.findViewById(R.id.foodimage);
+            item_name = itemView.findViewById(R.id.recycle_item_name);
+            item_pic = itemView.findViewById(R.id.foodimage);
             itemView.setOnClickListener(new View.OnClickListener()
             {
                 @Override

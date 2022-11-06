@@ -14,14 +14,14 @@ public class ReadNutritioncsv
         nutrtion_data = new String[]{};
     }
 
-    public void setValues(InputStreamReader inputStreamReader) throws Exception
+    public void setValues(InputStreamReader inputStreamReader)
     {
         csvReader = new CSVReader(inputStreamReader);
     }
 
     public String[] read_topics() throws Exception
     {
-        String[] nextreader = new String[]{};
+        String[] nextreader;
         nextreader = csvReader.readNext();
         if(nextreader !=null)
         {
@@ -33,17 +33,14 @@ public class ReadNutritioncsv
 
     public String[] read_values(String item_id) throws Exception
     {
-        String[] nextreader = new String[]{};
+        String[] nextreader;
 
         while((nextreader = csvReader.readNext()) != null)
         {
-            if(nextreader != null)
+            if(nextreader[0].equals(item_id))
             {
-                if(nextreader[0].equals(item_id))
-                {
-                    nutrtion_data = nextreader;
-                    return nutrtion_data;
-                }
+                nutrtion_data = nextreader;
+                return nutrtion_data;
             }
         }
 
