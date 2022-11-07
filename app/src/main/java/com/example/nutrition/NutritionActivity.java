@@ -99,11 +99,20 @@ public class NutritionActivity extends AppCompatActivity
             {
                 try
                 {
-                    File csvFile = new File("user_nutrtition.csv");
+
+                    File folder = getApplicationContext().getExternalFilesDir("Files");
+                    if(!folder.exists())
+                    {
+                        folder.mkdir();
+                    }
+
+                    File csvFile = new File(folder,"user_nutrition.csv");
+
 
                     if(!csvFile.exists())
                     {
                         csvFile.createNewFile();
+
                         outputFile = new FileWriter(csvFile);
                         csvWriter = new CSVWriter(outputFile);
                         csvWriter.writeNext(nutrition_topics);
@@ -114,14 +123,15 @@ public class NutritionActivity extends AppCompatActivity
                         csvWriter = new CSVWriter(outputFile);
                     }
                     csvWriter.writeNext(nutrition_values);
-                    Toast.makeText(getApplicationContext(),"Data Saved!!!",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
+
                 }
                 catch(Exception e)
                 {
                     System.out.println("999999999999999999999999999999999999999999999999999999999999999999999999999999999");
                     e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG);
-                    //finish();
+                    Toast.makeText(getApplicationContext(),"Error in Saving Data",Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });
