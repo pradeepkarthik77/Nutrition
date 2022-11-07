@@ -12,10 +12,13 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.opencsv.CSVWriter;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
+import java.nio.charset.Charset;
 
 public class NutritionActivity extends AppCompatActivity
 {
@@ -88,20 +91,30 @@ public class NutritionActivity extends AppCompatActivity
 
         save_data.setOnClickListener(new View.OnClickListener()
         {
+            protected FileWriter outputFile;
+            protected CSVWriter csvWriter;
+
             @Override
             public void onClick(View view)
             {
                 try
                 {
-                    String uristring = "file:///android_asset/user_nutrition.csv";
-                    URI uri = URI.create(uristring);
-                    File csvfile = new File(new URI("file:///android_asset/user_nutrition"));
-                    FileWriter fileWriter = new FileWriter(csvfile);
-                    CSVWriter csvWriter = new CSVWriter(fileWriter);
-                    String[] Writeit = nutrition_values;
-                    csvWriter.writeNext(new String[]{"101","10","11","12","13","14","15","11","12"});
-                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_LONG);
-                    finish();
+                    File csvFile = new File("user_nutrtition.csv");
+
+                    if(!csvFile.exists())
+                    {
+                        csvFile.createNewFile();
+                        outputFile = new FileWriter(csvFile);
+                        csvWriter = new CSVWriter(outputFile);
+                        csvWriter.writeNext(nutrition_topics);
+                    }
+                    else
+                    {
+                        outputFile = new FileWriter(csvFile);
+                        csvWriter = new CSVWriter(outputFile);
+                    }
+                    csvWriter.writeNext(nutrition_values);
+                    Toast.makeText(getApplicationContext(),"Data Saved!!!",Toast.LENGTH_LONG);
                 }
                 catch(Exception e)
                 {
