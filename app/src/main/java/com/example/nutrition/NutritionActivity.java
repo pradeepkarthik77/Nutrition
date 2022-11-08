@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.nio.charset.Charset;
+import java.util.Scanner;
 
 public class NutritionActivity extends AppCompatActivity
 {
@@ -113,17 +114,32 @@ public class NutritionActivity extends AppCompatActivity
                     {
                         csvFile.createNewFile();
 
-                        outputFile = new FileWriter(csvFile);
-                        csvWriter = new CSVWriter(outputFile);
-                        csvWriter.writeNext(nutrition_topics);
+//                        outputFile = new FileWriter(csvFile);
+//                        csvWriter = new CSVWriter(outputFile);
+//                        csvWriter.writeNext(nutrition_topics);
                     }
                     else
                     {
-                        outputFile = new FileWriter(csvFile);
-                        csvWriter = new CSVWriter(outputFile);
+//                        outputFile = new FileWriter(csvFile);
+//                        csvWriter = new CSVWriter(outputFile);
                     }
-                    csvWriter.writeNext(nutrition_values);
-                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
+//                    csvWriter.writeNext(nutrition_values);
+//                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
+//
+//                    File csvfile = new File("storage/emulated/0/Android/data/files/Files/user_nutrition.txt");
+//
+//                    if(!csvfile.exists())
+//                    {
+//                        csvfile.createNewFile();
+//                    }
+
+                    FileWriter fileWriter = new FileWriter(csvFile);
+
+                    fileWriter.write("hello World!");
+
+                    Toast.makeText(getApplicationContext(),"Saved Data",Toast.LENGTH_SHORT).show();
+
+
 
                 }
                 catch(Exception e)
