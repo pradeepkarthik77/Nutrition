@@ -42,7 +42,6 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
             });
         }
 
-
     }
 
     public MainRecyclerAdapter(Context context,String[] item_names,String[] item_id,int[] image_names)

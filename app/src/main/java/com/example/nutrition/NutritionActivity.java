@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.opencsv.CSVWriter;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -94,61 +96,51 @@ public class NutritionActivity extends AppCompatActivity
         {
             protected FileWriter outputFile;
             protected CSVWriter csvWriter;
+            FileOutputStream fileOutputStream;
+
+            private boolean isExternalStorageAvailable()
+            {
+                String extStorageState = Environment.getExternalStorageState();
+                if(extStorageState.equals(Environment.MEDIA_MOUNTED))
+                {
+                    return true;
+                }
+                return false;
+            }
 
             @Override
             public void onClick(View view)
             {
+                boolean tempbool = false;
+                String FILE_NAME = "user_nutrition_data.csv";
+                String data;
+
                 try
                 {
-
-                    File folder = getApplicationContext().getExternalFilesDir("Files");
-                    if(!folder.exists())
+                    File file = getFilesDir();
+                    File filer = new File(getFilesDir().toString()+"/"+FILE_NAME);
+                    if(!filer.exists())
                     {
-                        folder.mkdir();
-                    }
-
-                    File csvFile = new File(folder,"user_nutrition.csv");
-
-
-                    if(!csvFile.exists())
-                    {
-                        csvFile.createNewFile();
-
-//                        outputFile = new FileWriter(csvFile);
-//                        csvWriter = new CSVWriter(outputFile);
-//                        csvWriter.writeNext(nutrition_topics);
+                        fileOutputStream = openFileOutput(FILE_NAME,MODE_APPEND);
+                        data = String.join(",",nutrition_topics)+"\n";
+                        fileOutputStream.write(data.getBytes());
                     }
                     else
                     {
-//                        outputFile = new FileWriter(csvFile);
-//                        csvWriter = new CSVWriter(outputFile);
+                        fileOutputStream = openFileOutput(FILE_NAME,MODE_APPEND);
                     }
-//                    csvWriter.writeNext(nutrition_values);
-//                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
-//
-//                    File csvfile = new File("storage/emulated/0/Android/data/files/Files/user_nutrition.txt");
-//
-//                    if(!csvfile.exists())
-//                    {
-//                        csvfile.createNewFile();
-//                    }
-
-                    FileWriter fileWriter = new FileWriter(csvFile);
-
-                    fileWriter.write("hello World!");
-
-                    Toast.makeText(getApplicationContext(),"Saved Data",Toast.LENGTH_SHORT).show();
-
-
-
+                    data = String.join(",",nutrition_values)+"\n";
+                    fileOutputStream.write(data.getBytes());
+                    Toast.makeText(getApplicationContext(),"Data Saved",Toast.LENGTH_SHORT).show();
                 }
                 catch(Exception e)
                 {
-                    System.out.println("999999999999999999999999999999999999999999999999999999999999999999999999999999999");
+                    System.out.println("Error in Accessing the File");
                     e.printStackTrace();
                     Toast.makeText(getApplicationContext(),"Error in Saving Data",Toast.LENGTH_LONG).show();
-                    finish();
                 }
+
+                finish();
             }
         });
 
